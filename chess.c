@@ -4,6 +4,13 @@ char mainBoard [8][8];
 struct ChessPiece
 {
 	char pieceName;
+	/*
+	R: Castle (5 points)
+	N: Knight (3 points)
+	B: Bishop (3 points)
+	P: Pawn (1 point)
+	Q: Queen (9 points)
+	*/
 	char colour; // W for white and B for black
 	bool validPos[8][8]; // Where the piece can move
 };
