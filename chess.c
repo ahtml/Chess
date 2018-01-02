@@ -1,5 +1,12 @@
 #include <stdio.h>
+#include <stdbool.h>
 char mainBoard [8][8];
+struct ChessPiece
+{
+	char pieceName;
+	char colour; // W for white and B for black
+	bool validPos[8][8]; // Where the piece can move
+};
 
 // Function to initialize all the pieces
 void initializeBoard(){
