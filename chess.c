@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 
 struct ChessPiece
 {
@@ -71,6 +72,37 @@ void printBoard(){
 		printf("%d ",i);
 	}
 	printf("8|\n");
+}
+
+int possibleMoves(int row, int column){
+	char colour = 'N';
+	int pos = 8*row + column
+	// determine colour using lower/upper case char
+	if(strcmp(&mainBoard[row][column].pieceName,"-")==0){
+		printf("No piece found\n");
+		return 0;
+	}
+	if((int)mainBoard[row][column].pieceName >= 97){
+		printf("Piece is white\n");
+		colour = 'W';
+	}
+	else{
+		printf("Piece is black\n");
+		colour = 'B';
+	}
+	//moves for pawn
+	if(strcmp(&mainBoard[row][column].pieceName,"p") == 0 || strcmp(&mainBoard[row][column].pieceName,"P")==0){
+		printf("Piece is a pawn.\n");
+
+	}
+	return 0;
+}
+
+void possibleMovesTests(){
+	// For pawn
+	possibleMoves(1,5);
+	possibleMoves(6,4);
+	possibleMoves(3,5);
 }
 
 int main(){
