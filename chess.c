@@ -76,12 +76,14 @@ void printBoard(){
 
 int possibleMoves(int row, int column){
 	char colour = 'N';
-	int pos = 8*row + column
-	// determine colour using lower/upper case char
+	int pos = 8*row + column;
+	
 	if(strcmp(&mainBoard[row][column].pieceName,"-")==0){
 		printf("No piece found\n");
 		return 0;
 	}
+
+	// determine colour using lower/upper case char
 	if((int)mainBoard[row][column].pieceName >= 97){
 		printf("Piece is white\n");
 		colour = 'W';
@@ -93,7 +95,30 @@ int possibleMoves(int row, int column){
 	//moves for pawn
 	if(strcmp(&mainBoard[row][column].pieceName,"p") == 0 || strcmp(&mainBoard[row][column].pieceName,"P")==0){
 		printf("Piece is a pawn.\n");
+		// If piece is black
+		if(strcmp(&colour,"B")==0){
+			if(pos>15){
 
+			}
+		}
+		else{
+
+		}
+	}
+	else if(strcmp(&mainBoard[row][column].pieceName,"R") == 0 || strcmp(&mainBoard[row][column].pieceName,"r")==0){
+		printf("Piece is a castle\n");
+	}
+	else if(strcmp(&mainBoard[row][column].pieceName,"N") == 0 || strcmp(&mainBoard[row][column].pieceName,"n")==0){
+		printf("Piece is a knight\n");
+	}
+	else if(strcmp(&mainBoard[row][column].pieceName,"B") == 0 || strcmp(&mainBoard[row][column].pieceName,"b")==0){
+		printf("Piece is a bishop\n");
+	}
+	else if(strcmp(&mainBoard[row][column].pieceName,"Q") == 0 || strcmp(&mainBoard[row][column].pieceName,"q")==0){
+		printf("Piece is a queen\n");
+	}
+	else{
+		printf("Piece is a king\n");
 	}
 	return 0;
 }
