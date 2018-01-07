@@ -74,29 +74,41 @@ void printBoard(){
 	printf("8|\n");
 }
 
+/**
+Determine what colour the piece is
+*/
+int getColour(int asciiColour){
+	// 1 --> White piece
+	// 0 --> Black piece
+	// determine colour using lower/upper case char of alpahbet
+	if(asciiColour >= 97){
+		printf("Piece is white\n");
+		return 1;
+	}
+	else{
+		printf("Piece is black\n");
+		return 0;
+	}
+}
+
 int possibleMoves(int row, int column){
-	char colour = 'N';
+	int colour = -1;
 	int pos = 8*row + column;
-	
+
+	// If there is no piece in this square
 	if(strcmp(&mainBoard[row][column].pieceName,"-")==0){
 		printf("No piece found\n");
 		return 0;
 	}
 
-	// determine colour using lower/upper case char
-	if((int)mainBoard[row][column].pieceName >= 97){
-		printf("Piece is white\n");
-		colour = 'W';
-	}
-	else{
-		printf("Piece is black\n");
-		colour = 'B';
-	}
-	//moves for pawn
+	//Set the colour of the piece
+	colour = getColour((int)&mainBoard[row][column].pieceName);
+	
+	//Identify and show possible moves respectively
 	if(strcmp(&mainBoard[row][column].pieceName,"p") == 0 || strcmp(&mainBoard[row][column].pieceName,"P")==0){
 		printf("Piece is a pawn.\n");
 		// If piece is black
-		if(strcmp(&colour,"B")==0){
+		if(colour==0){
 			if(pos>15){
 
 			}
@@ -134,5 +146,6 @@ int main(){
 	
 	initializeBoard();
 	printBoard();
+	possibleMovesTests();
 	return 0;
 }
