@@ -101,13 +101,13 @@ void possMovesPawn(int row,int column,int colour){
 				mainBoard[row][column].validPos[row+1][column] = true;
 			}
 			// If the pawn is not on the right edge
-			if((column+1)%8!=0){
+			if(column==7){
 				if(getColour(mainBoard[row+1][column+1].pieceName)==1){
 					mainBoard[row][column].validPos[row+1][column+1] = true;
 				}
 			}
 			// If the pawn is not on the left edge
-			if(column%8!=0){
+			if(column==0){
 				if(getColour(mainBoard[row+1][column-1].pieceName)==1){
 					mainBoard[row][column].validPos[row+1][column-1] = true;
 				}
@@ -116,6 +116,32 @@ void possMovesPawn(int row,int column,int colour){
 		// If the piece hasn't moved yet and the spots for two rows in front are empty
 		if((row*8+column)<16 && strcmp(&mainBoard[row+1][column].pieceName,"-") == 0 && strcmp(&mainBoard[row+2][column].pieceName,"-") == 0){
 			mainBoard[row][column].validPos[row+2][column] = true;
+		}
+	}
+	// If the pawn is white
+	else{
+		// If the pawn is not in the last row
+		if((row*8+column)>7){
+			//If the spot one row in front is empty
+			if(strcmp(&mainBoard[row-1][column].pieceName,"-") == 0){
+				mainBoard[row][column].validPos[row-1][column] = true;
+			}
+			// If the pawn is not on the right edge
+			if(column==7){
+				if(getColour(mainBoard[row-1][column+1].pieceName)==0){
+					mainBoard[row][column].validPos[row-1][column+1] = true;
+				}
+			}
+			// If the pawn is not on the left edge
+			if(column==0){
+				if(getColour(mainBoard[row-1][column-1].pieceName)==0){
+					mainBoard[row][column].validPos[row-1][column-1] = true;
+				}
+			}
+		}
+		// If the piece hasn't moved yet and the spots for two rows in front are empty
+		if((row*8+column)>64 && strcmp(&mainBoard[row-1][column].pieceName,"-") == 0 && strcmp(&mainBoard[row-2][column].pieceName,"-") == 0){
+			mainBoard[row][column].validPos[row-2][column] = true;
 		}
 	}
 }
