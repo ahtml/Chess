@@ -91,6 +91,35 @@ int getColour(int asciiColour){
 	}
 }
 
+void possMovesPawn(int row,int column,int colour){
+	// If the pawn is black
+	if(colour==0){
+		// If the pawn is not in the last row
+		if((row*8+column)<56){
+			//If the spot one row in front is empty
+			if(strcmp(&mainBoard[row+1][column].pieceName,"-") == 0){
+				mainBoard[row][column].validPos[row+1][column] = true;
+			}
+			// If the pawn is not on the right edge
+			if((column+1)%8!=0){
+				if(getColour(mainBoard[row+1][column+1].pieceName)==1){
+					mainBoard[row][column].validPos[row+1][column+1] = true;
+				}
+			}
+			// If the pawn is not on the left edge
+			if(column%8!=0){
+				if(getColour(mainBoard[row+1][column-1].pieceName)==1){
+					mainBoard[row][column].validPos[row+1][column-1] = true;
+				}
+			}
+		}
+		// If the piece hasn't moved yet and the spots for two rows in front are empty
+		if((row*8+column)<16 && strcmp(&mainBoard[row+1][column].pieceName,"-") == 0 && strcmp(&mainBoard[row+2][column].pieceName,"-") == 0){
+			mainBoard[row][column].validPos[row+2][column] = true;
+		}
+	}
+}
+
 int possibleMoves(int row, int column){
 	int colour = -1;
 	int pos = 8*row + column;
@@ -107,15 +136,7 @@ int possibleMoves(int row, int column){
 	//Identify and show possible moves respectively
 	if(strcmp(&mainBoard[row][column].pieceName,"p") == 0 || strcmp(&mainBoard[row][column].pieceName,"P")==0){
 		printf("Piece is a pawn.\n");
-		// If piece is black
-		if(colour==0){
-			if(pos>15){
-
-			}
-		}
-		else{
-
-		}
+		possMovesPawn(row,column,colour);
 	}
 	else if(strcmp(&mainBoard[row][column].pieceName,"R") == 0 || strcmp(&mainBoard[row][column].pieceName,"r")==0){
 		printf("Piece is a castle\n");
