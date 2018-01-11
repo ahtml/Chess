@@ -92,6 +92,12 @@ int getColour(int asciiColour){
 }
 
 void possMovesPawn(int row,int column,int colour){
+	/*
+	TODO: 
+	- Impliment En passant logic (https://en.wikipedia.org/wiki/En_passant)
+	- Check for King in check scenario
+	*/
+
 	// If the pawn is black
 	if(colour==0){
 		// If the pawn is not in the last row
