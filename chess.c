@@ -278,6 +278,11 @@ void possMovesKnight(int row, int column, int colour){
 }
 
 void possMovesBishop(int row, int column, int colour){
+	/*
+	TODO: 
+	- Check for King in check scenario
+	*/
+
 	// Move in the SE direction
 	for(int i=row+1;i<8;i++){
 		// Can not jump over piece
