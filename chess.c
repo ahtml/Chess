@@ -328,6 +328,11 @@ void possMovesBishop(int row, int column, int colour){
 }
 
 void possMovesQueen(int row, int column, int colour){
+	/*
+	TODO: 
+	- Check for King in check scenario
+	*/
+	
 	// The queen moves in a combination of the castle and the bishop
 	possMovesCastle(row,column,colour);
 	possMovesBishop(row,column,colour);
