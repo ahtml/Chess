@@ -98,8 +98,8 @@ void possMovesPawn(int row,int column,int colour){
 	- Check for King in check scenario
 	*/
 
-	// If the pawn is white
-	if(colour==1){
+	// If the pawn is black
+	if(colour==0){
 		// If the pawn is not in the last row
 		if((row*8+column)<56){
 			//If the spot one row in front is empty
@@ -108,13 +108,13 @@ void possMovesPawn(int row,int column,int colour){
 			}
 			// If the pawn is not on the right edge
 			if(column==7){
-				if(getColour((int)&mainBoard[row+1][column+1].pieceName)==0){
+				if(getColour((int)&mainBoard[row+1][column+1].pieceName)!=colour){
 					mainBoard[row][column].validPos[row+1][column+1] = true;
 				}
 			}
 			// If the pawn is not on the left edge
 			if(column==0){
-				if(getColour(mainBoard[row+1][column-1].pieceName)==0){
+				if(getColour(mainBoard[row+1][column-1].pieceName)!=colour){
 					mainBoard[row][column].validPos[row+1][column-1] = true;
 				}
 			}
@@ -124,7 +124,7 @@ void possMovesPawn(int row,int column,int colour){
 			mainBoard[row][column].validPos[row+2][column] = true;
 		}
 	}
-	// If the pawn is black
+	// If the pawn is white
 	else{
 		// If the pawn is not in the last row
 		if((row*8+column)>7){
@@ -134,13 +134,13 @@ void possMovesPawn(int row,int column,int colour){
 			}
 			// If the pawn is not on the right edge
 			if(column==7){
-				if(getColour((int)&mainBoard[row-1][column+1].pieceName)==1){
+				if(getColour((int)&mainBoard[row-1][column+1].pieceName)!=colour){
 					mainBoard[row][column].validPos[row-1][column+1] = true;
 				}
 			}
 			// If the pawn is not on the left edge
 			if(column==0){
-				if(getColour(mainBoard[row-1][column-1].pieceName)==1){
+				if(getColour(mainBoard[row-1][column-1].pieceName)!=colour){
 					mainBoard[row][column].validPos[row-1][column-1] = true;
 				}
 			}
@@ -199,6 +199,14 @@ void possMovesCastle(int row,int column,int colour){
 			break;
 		}
 		mainBoard[row][column].validPos[row][i] = true;
+	}
+}
+
+void possMovesKnight(int row, int column, int colour){
+	if(row>=2 && column>=1){
+		if(getColour((int)&mainBoard[row-2][column-1])!=colour){
+			
+		}
 	}
 }
 
