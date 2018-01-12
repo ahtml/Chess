@@ -277,6 +277,51 @@ void possMovesKnight(int row, int column, int colour){
 	}
 }
 
+void possMovesBishop(int row, int column, int colour){
+	// Move in the SE direction
+	for(int i=row+1;i<8;i++){
+		// Can not jump over piece
+		if(strcmp(&mainBoard[i][column+i-row].pieceName,"-")!=0){
+			//If the piece is the oppponents piece
+			if(getColour((int)&mainBoard[i][column+i-row].pieceName)!=colour){
+				mainBoard[row][column].validPos[i][column+i-row] = true;
+			}
+			break;
+		}
+		mainBoard[row][column].validPos[i][column+i-row] = true;
+	}
+	// Move in the NW direction
+	for(int i = row-1;i>=0;i--){
+		if(strcmp(&mainBoard[i][column+i-row].pieceName,"-")!=0){
+			if(getColour((int)&mainBoard[i][column+i-row].pieceName)!=colour){
+				mainBoard[row][column].validPos[i][column+i-row] = true;
+			}
+			break;
+		}
+		mainBoard[row][column].validPos[i][column+i-row] = true;
+	}
+	// Move in the SW direction
+	for(int i = row+1;i<8;i++){
+		if(strcmp(&mainBoard[i][column-i+row].pieceName,"-")!=0){
+			if(getColour((int)&mainBoard[i][column-i+row].pieceName)!=colour){
+				mainBoard[row][column].validPos[i][column-i+row] = true;
+			}
+			break;
+		}
+		mainBoard[row][column].validPos[i][column-i+row] = true;
+	}
+	// Move in the NE direction
+	for(int i = row-1;i>=0;i--){
+		if(strcmp(&mainBoard[i][column-i+row].pieceName,"-")!=0){
+			if(getColour((int)&mainBoard[i][column-i+row].pieceName)!=colour){
+				mainBoard[row][column].validPos[i][column-i+row] = true;
+			}
+			break;
+		}
+		mainBoard[row][column].validPos[i][column-i+row] = true;
+	}
+}
+
 int possibleMoves(int row, int column){
 	int colour = -1;
 	int pos = 8*row + column;
