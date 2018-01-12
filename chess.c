@@ -203,6 +203,11 @@ void possMovesCastle(int row,int column,int colour){
 }
 
 void possMovesKnight(int row, int column, int colour){
+	/*
+	TODO: 
+	- Check for King in check scenario
+	*/
+
 	// Making an move by moving one to the right and two up
 	if(row>=2 && column<=6){
 		// Check if the spot is empty
