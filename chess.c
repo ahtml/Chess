@@ -203,9 +203,71 @@ void possMovesCastle(int row,int column,int colour){
 }
 
 void possMovesKnight(int row, int column, int colour){
+	// Making an move by moving one to the right and two up
+	if(row>=2 && column<=6){
+		// Check if the spot is empty
+		if(strcmp(&mainBoard[row-2][column+1].pieceName,"-")==0){
+			mainBoard[row][column].validPos[row-2][column+1] = true;
+		}
+		// Check if the spot has the oponent's piece
+		else if(getColour((int)&mainBoard[row-2][column+1])!=colour){
+			mainBoard[row][column].validPos[row-2][column+1] = true;
+		}
+	}
+	if(row>=1 && column<=5){
+		if(strcmp(&mainBoard[row-1][column+2].pieceName,"-")==0){
+			mainBoard[row][column].validPos[row-1][column+2] = true;
+		}
+		else if(getColour((int)&mainBoard[row-1][column+2])!=colour){
+			mainBoard[row][column].validPos[row-1][column+2] = true;
+		}
+	}
+	if(row<=6 && column<=5){
+		if(strcmp(&mainBoard[row+1][column+2].pieceName,"-")==0){
+			mainBoard[row][column].validPos[row+1][column+2] = true;
+		}
+		else if(getColour((int)&mainBoard[row+1][column+2])!=colour){
+			mainBoard[row][column].validPos[row+1][column+2] = true;
+		}
+	}
+	if(row<=5 && column<=6){
+		if(strcmp(&mainBoard[row+2][column+1].pieceName,"-")==0){
+			mainBoard[row][column].validPos[row+2][column+1] = true;
+		}
+		else if(getColour((int)&mainBoard[row+2][column+1])!=colour){
+			mainBoard[row][column].validPos[row+2][column+1] = true;
+		}
+	}
+	if(row<=5 && column>=1){
+		if(strcmp(&mainBoard[row+2][column-1].pieceName,"-")==0){
+			mainBoard[row][column].validPos[row+2][column-1] = true;
+		}
+		else if(getColour((int)&mainBoard[row+2][column-1])!=colour){
+			mainBoard[row][column].validPos[row+2][column-1] = true;
+		}
+	}
+	if(row<=6 && column>=2){
+		if(strcmp(&mainBoard[row+1][column-2].pieceName,"-")==0){
+			mainBoard[row][column].validPos[row+1][column-2] = true;
+		}
+		else if(getColour((int)&mainBoard[row+1][column-2])!=colour){
+			mainBoard[row][column].validPos[row+1][column-2] = true;
+		}
+	}
+	if(row>=1 && column>=2){
+		if(strcmp(&mainBoard[row-1][column-2].pieceName,"-")==0){
+			mainBoard[row][column].validPos[row-1][column-2] = true;
+		}
+		else if(getColour((int)&mainBoard[row-1][column-2])!=colour){
+			mainBoard[row][column].validPos[row-1][column-2] = true;
+		}
+	}
 	if(row>=2 && column>=1){
-		if(getColour((int)&mainBoard[row-2][column-1])!=colour){
-			
+		if(strcmp(&mainBoard[row-2][column-1].pieceName,"-")==0){
+			mainBoard[row][column].validPos[row-2][column-1] = true;
+		}
+		else if(getColour((int)&mainBoard[row-2][column-1])!=colour){
+			mainBoard[row][column].validPos[row-2][column-1] = true;
 		}
 	}
 }
