@@ -327,6 +327,12 @@ void possMovesBishop(int row, int column, int colour){
 	}
 }
 
+void possMovesQueen(int row, int column, int colour){
+	// The queen moves in a combination of the castle and the bishop
+	possMovesCastle(row,column,colour);
+	possMovesBishop(row,column,colour);
+}
+
 int possibleMoves(int row, int column){
 	int colour = -1;
 	int pos = 8*row + column;
