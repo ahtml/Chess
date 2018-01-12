@@ -108,7 +108,7 @@ void possMovesPawn(int row,int column,int colour){
 			}
 			// If the pawn is not on the right edge
 			if(column==7){
-				if(getColour(mainBoard[row+1][column+1].pieceName)==0){
+				if(getColour((int)&mainBoard[row+1][column+1].pieceName)==0){
 					mainBoard[row][column].validPos[row+1][column+1] = true;
 				}
 			}
@@ -134,7 +134,7 @@ void possMovesPawn(int row,int column,int colour){
 			}
 			// If the pawn is not on the right edge
 			if(column==7){
-				if(getColour(mainBoard[row-1][column+1].pieceName)==1){
+				if(getColour((int)&mainBoard[row-1][column+1].pieceName)==1){
 					mainBoard[row][column].validPos[row-1][column+1] = true;
 				}
 			}
@@ -153,11 +153,47 @@ void possMovesPawn(int row,int column,int colour){
 }
 
 void possMovesCastle(int row,int column,int colour){
-	//If the castle is white
-	if(colour==0){
-		for(int i = row+1;row<8;i++){
-
+	//Move forward
+	for(int i = row+1;i<8;i++){
+		//Can not jump over a piece
+		if(strcmp(&mainBoard[i][column].pieceName,"-")!=0){
+			//If the piece is the oppponents piece
+			if(getColour((int)&mainBoard[i][column].pieceName)!=colour){
+				mainBoard[row][column].validPos[i][column] = true;
+			}
+			break;
 		}
+		mainBoard[row][column].validPos[i][column] = true;
+	}
+	//Move backward
+	for(int i = row-1;i>=0;i--){
+		if(strcmp(&mainBoard[i][column].pieceName,"-")!=0){
+			if(getColour((int)&mainBoard[i][column].pieceName)!=colour){
+				mainBoard[row][column].validPos[i][column] = true;
+			}
+			break;
+		}
+		mainBoard[row][column].validPos[i][column] = true;
+	}
+	//Move to the right
+	for(int i = column+1;i<8;i++){
+		if(strcmp(&mainBoard[row][i].pieceName,"-")!=0){
+			if(getColour((int)&mainBoard[row][i].pieceName)!=colour){
+				mainBoard[row][column].validPos[row][i] = true;
+			}
+			break;
+		}
+		mainBoard[row][column].validPos[row][i] = true;
+	}
+	//Move to the left
+	for(int i = column-1;i>=0;i--){
+		if(strcmp(&mainBoard[row][i].pieceName,"-")!=0){
+			if(getColour((int)&mainBoard[row][i].pieceName)!=colour){
+				mainBoard[row][column].validPos[row][i] = true;
+			}
+			break;
+		}
+		mainBoard[row][column].validPos[row][i] = true;
 	}
 }
 
