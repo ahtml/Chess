@@ -339,6 +339,84 @@ void possMovesQueen(int row, int column, int colour){
 	possMovesBishop(row,column,colour);
 }
 
+void possMovesKing(int row, int column, int colour){
+
+	// Not on the left side
+	if(column!=0 && column!=7){
+		if(strcmp(&mainBoard[row][column-1].pieceName,"-")==0 || getColour((int)&mainBoard[row][column-1])!=colour){
+			mainBoard[row][column].validPos[row][column-1] = true;
+		}
+		if(strcmp(&mainBoard[row][column+1].pieceName,"-")==0 || getColour((int)&mainBoard[row][column+1])!=colour){
+			mainBoard[row][column].validPos[row][column+1] = true;
+		}
+		if(row!=0){
+			if(strcmp(&mainBoard[row-1][column-1].pieceName,"-")==0 || getColour((int)&mainBoard[row-1][column-1])!=colour){
+				mainBoard[row][column].validPos[row-1][column-1] = true;
+			}
+			if(strcmp(&mainBoard[row-1][column].pieceName,"-")==0 || getColour((int)&mainBoard[row-1][column])!=colour){
+				mainBoard[row][column].validPos[row-1][column] = true;
+			}
+			if(strcmp(&mainBoard[row-1][column+1].pieceName,"-")==0 || getColour((int)&mainBoard[row-1][column+1])!=colour){
+				mainBoard[row][column].validPos[row-1][column+1] = true;
+			}
+		}
+		if(row!=7){
+			if(strcmp(&mainBoard[row+1][column-1].pieceName,"-")==0 || getColour((int)&mainBoard[row+1][column-1])!=colour){
+				mainBoard[row][column].validPos[row+1][column-1] = true;
+			}
+			if(strcmp(&mainBoard[row+1][column].pieceName,"-")==0 || getColour((int)&mainBoard[row+1][column])!=colour){
+				mainBoard[row][column].validPos[row+1][column] = true;
+			}
+			if(strcmp(&mainBoard[row+1][column+1].pieceName,"-")==0 || getColour((int)&mainBoard[row+1][column+1])!=colour){
+				mainBoard[row][column].validPos[row+1][column+1] = true;
+			}
+		}
+	}
+	else if(column==0){
+		if(strcmp(&mainBoard[row][column+1].pieceName,"-")==0 || getColour((int)&mainBoard[row][column+1])!=colour){
+			mainBoard[row][column].validPos[row][column+1] = true;
+		}
+		if(row!=0){
+			if(strcmp(&mainBoard[row-1][column].pieceName,"-")==0 || getColour((int)&mainBoard[row-1][column])!=colour){
+				mainBoard[row][column].validPos[row-1][column] = true;
+			}
+			if(strcmp(&mainBoard[row-1][column+1].pieceName,"-")==0 || getColour((int)&mainBoard[row-1][column+1])!=colour){
+				mainBoard[row][column].validPos[row-1][column+1] = true;
+			}
+		}
+		if(row!=7){
+			if(strcmp(&mainBoard[row+1][column].pieceName,"-")==0 || getColour((int)&mainBoard[row+1][column])!=colour){
+				mainBoard[row][column].validPos[row+1][column] = true;
+			}
+			if(strcmp(&mainBoard[row+1][column+1].pieceName,"-")==0 || getColour((int)&mainBoard[row+1][column+1])!=colour){
+				mainBoard[row][column].validPos[row+1][column+1] = true;
+			}
+		}
+	}
+	else{
+		if(strcmp(&mainBoard[row][column-1].pieceName,"-")==0 || getColour((int)&mainBoard[row][column-1])!=colour){
+			mainBoard[row][column].validPos[row][column-1] = true;
+		}
+		if(row!=0){
+			if(strcmp(&mainBoard[row-1][column-1].pieceName,"-")==0 || getColour((int)&mainBoard[row-1][column-1])!=colour){
+				mainBoard[row][column].validPos[row-1][column-1] = true;
+			}
+			if(strcmp(&mainBoard[row-1][column].pieceName,"-")==0 || getColour((int)&mainBoard[row-1][column])!=colour){
+				mainBoard[row][column].validPos[row-1][column] = true;
+			}
+		}
+		if(row!=7){
+			if(strcmp(&mainBoard[row+1][column-1].pieceName,"-")==0 || getColour((int)&mainBoard[row+1][column-1])!=colour){
+				mainBoard[row][column].validPos[row+1][column-1] = true;
+			}
+			if(strcmp(&mainBoard[row+1][column].pieceName,"-")==0 || getColour((int)&mainBoard[row+1][column])!=colour){
+				mainBoard[row][column].validPos[row+1][column] = true;
+			}
+		}
+	}
+
+}
+
 int possibleMoves(int row, int column){
 	int colour = -1;
 	int pos = 8*row + column;
