@@ -340,6 +340,11 @@ void possMovesQueen(int row, int column, int colour){
 }
 
 void possMovesKing(int row, int column, int colour){
+	/*
+	TODO:
+	- Implement Castling
+	- Check for King in check scenario
+	*/
 
 	// Not on the left side
 	if(column!=0 && column!=7){
