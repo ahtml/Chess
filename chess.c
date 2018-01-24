@@ -83,13 +83,31 @@ int getColour(int asciiColour){
 	// 0 --> Black piece
 	// determine colour using lower/upper case char of alpahbet
 	if(asciiColour >= 97){
-		printf("Piece is white\n");
+		//printf("Piece is white\n");
 		return 1;
 	}
 	else{
-		printf("Piece is black\n");
+		// printf("Piece is black\n");
 		return 0;
 	}
+}
+
+int locateKing(int colour){
+	//Find correct King
+	for(int i=0;i<8;i++){
+		for(int j=0;j<8;j++){
+			//If the King piece is found and it is the same colour
+			if((strcmp(&mainBoard[i][j].pieceName,"K")==0 || strcmp(&mainBoard[i][j].pieceName,"k")==0) && getColour((int)&mainBoard[i][j])==colour){
+				return i*8+j;
+			}
+		}
+	}
+	return -1;
+}
+
+int inCheck(int colour,int position){
+
+	return 0;
 }
 
 void possMovesPawn(int row,int column,int colour){
@@ -442,18 +460,23 @@ int possibleMoves(int row, int column){
 	}
 	else if(strcmp(&mainBoard[row][column].pieceName,"R") == 0 || strcmp(&mainBoard[row][column].pieceName,"r")==0){
 		printf("Piece is a castle\n");
+		possMovesCastle(row,column,colour);
 	}
 	else if(strcmp(&mainBoard[row][column].pieceName,"N") == 0 || strcmp(&mainBoard[row][column].pieceName,"n")==0){
 		printf("Piece is a knight\n");
+		possMovesKnight(row,column,colour);
 	}
 	else if(strcmp(&mainBoard[row][column].pieceName,"B") == 0 || strcmp(&mainBoard[row][column].pieceName,"b")==0){
 		printf("Piece is a bishop\n");
+		possMovesBishop(row,column,colour);
 	}
 	else if(strcmp(&mainBoard[row][column].pieceName,"Q") == 0 || strcmp(&mainBoard[row][column].pieceName,"q")==0){
 		printf("Piece is a queen\n");
+		possMovesQueen(row,column,colour);
 	}
 	else{
 		printf("Piece is a king\n");
+		possMovesKing(row,column,colour);
 	}
 	return 0;
 }
@@ -465,10 +488,20 @@ void possibleMovesTests(){
 	possibleMoves(3,5);
 }
 
+void allMovesTests(){
+	for(int i = 0; i<8; i++){
+		for(int j = 0; j<8; j++){
+			possibleMoves(i,j);
+		}
+	}
+	printf("Completed moves for an initialized Board.\n");
+}
+
 int main(){
 	
 	initializeBoard();
 	printBoard();
 	possibleMovesTests();
+	allMovesTests();
 	return 0;
 }
